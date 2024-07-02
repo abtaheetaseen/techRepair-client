@@ -3,6 +3,7 @@ import useCart from '../../../hooks/useCart'
 import { MdDeleteForever } from 'react-icons/md';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
 
@@ -105,9 +106,24 @@ const Cart = () => {
       <div className='text-right mt-5 p-5 card shadow-xl'>
         <h1 className='text-gray-600'>TOTAL ORDERS : <span className='text-gray-800 font-bold'>{cart?.length}</span></h1>
         <h1 className='text-gray-600 mb-3'>TOTAL PRICE : <span className='text-gray-800 font-bold'>${totalPrice}</span></h1>
-        <button className='btn btn-sm border-none bg-blue-600 tracking-widest text-white hover:bg-blue-500'>
+        <div>
+          {
+            !cart.length ?
+            <>
+                    <button disabled className='w-full btn btn-sm border-none bg-blue-600 tracking-widest text-white hover:bg-blue-500'>
           Pay
         </button>
+            </> :
+            <>
+        <Link to={"/dashboard/payment"}>
+        <button className='w-full btn btn-sm border-none bg-blue-600 tracking-widest text-white hover:bg-blue-500'>
+          Pay
+        </button>
+        </Link>
+            </>
+          }
+
+        </div>
       </div>
 
       </div>

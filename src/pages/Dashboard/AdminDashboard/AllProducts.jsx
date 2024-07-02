@@ -5,6 +5,7 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { FiEdit } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { IoEye } from 'react-icons/io5';
 
 const AllProducts = () => {
 

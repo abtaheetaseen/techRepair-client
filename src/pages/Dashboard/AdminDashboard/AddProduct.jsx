@@ -23,7 +23,6 @@ const AddProduct = () => {
         const category = selectCategory;
         const imageURL = form.image.files[0];
         const description = form.description.value.split(".").map(item => item.trim()).filter(item => item.length > 0);
-        console.log(typeof description)
 
         try {
             const image = await imageUpload(imageURL);

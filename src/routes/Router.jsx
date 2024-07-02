@@ -19,6 +19,8 @@ import AddReview from "../pages/Dashboard/UserDashboard/AddReview";
 import AllProducts from "../pages/Dashboard/AdminDashboard/AllProducts";
 import AllServices from "../pages/Dashboard/AdminDashboard/AllServices";
 import UpdateProduct from "../pages/Dashboard/AdminDashboard/UpdateProduct";
+import UpdateService from "../pages/Dashboard/AdminDashboard/UpdateService";
+import Payment from "../pages/Dashboard/UserDashboard/Payment";
 
 export const Router = createBrowserRouter([
     {
@@ -69,6 +71,10 @@ export const Router = createBrowserRouter([
                 path: "addReview",
                 element: <AddReview />
             },
+            {
+                path: "payment",
+                element: <Payment />
+            },
 
             // admin routes
             {
@@ -113,6 +119,13 @@ export const Router = createBrowserRouter([
                     <UpdateProduct />
                 </AdminRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+            },
+            {
+                path: "updateService/:id",
+                element: <AdminRoute>
+                    <UpdateService />
+                </AdminRoute>,
+                loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
             },
         ]
     }
