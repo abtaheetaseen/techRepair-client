@@ -21,6 +21,12 @@ import AllServices from "../pages/Dashboard/AdminDashboard/AllServices";
 import UpdateProduct from "../pages/Dashboard/AdminDashboard/UpdateProduct";
 import UpdateService from "../pages/Dashboard/AdminDashboard/UpdateService";
 import Payment from "../pages/Dashboard/UserDashboard/Payment";
+import Success from "../pages/Dashboard/UserDashboard/Success";
+import Fail from "../pages/Dashboard/UserDashboard/Fail";
+import Cancel from "../pages/Dashboard/UserDashboard/Cancel";
+import MyServices from "../pages/Dashboard/UserDashboard/MyServices";
+import AllServicesBookings from "../pages/Dashboard/AdminDashboard/AllServicesBookings";
+import MyShopOrders from "../pages/Dashboard/UserDashboard/MyShopOrders";
 
 export const Router = createBrowserRouter([
     {
@@ -55,6 +61,18 @@ export const Router = createBrowserRouter([
                 path: "/shop",
                 element: <Shop />
             },
+            {
+                path: "/success",
+                element: <Success />
+            },
+            {
+                path: "/fail",
+                element: <Fail />
+            },
+            {
+                path: "/cancel",
+                element: <Cancel />
+            },
         ]
     },
     {
@@ -74,6 +92,14 @@ export const Router = createBrowserRouter([
             {
                 path: "payment",
                 element: <Payment />
+            },
+            {
+                path: "myServiceOrders",
+                element: <MyServices />
+            },
+            {
+                path: "myShopOrders",
+                element: <MyShopOrders />
             },
 
             // admin routes
@@ -111,6 +137,12 @@ export const Router = createBrowserRouter([
                 path: "allServices",
                 element: <AdminRoute>
                     <AllServices />
+                </AdminRoute>
+            },
+            {
+                path: "allServicesBookings",
+                element: <AdminRoute>
+                    <AllServicesBookings />
                 </AdminRoute>
             },
             {

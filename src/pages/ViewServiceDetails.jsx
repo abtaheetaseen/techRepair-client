@@ -1,13 +1,15 @@
 import React, { useContext } from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../provider/AuthProvider';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
+import moment from 'moment';
 
 const ViewServiceDetails = () => {
 
     const {user} = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
 
     const item = useLoaderData();
 
@@ -18,6 +20,7 @@ const ViewServiceDetails = () => {
         const email = form.email.value;
         const category = form.category.value;
         const serviceName = form.serviceName.value;
+        const price = parseInt(form.price.value);
         const phoneNumber = parseInt(form.phoneNumber.value);
         const address = form.address.value;
         const date = form.date.value;
@@ -28,9 +31,12 @@ const ViewServiceDetails = () => {
             email,
             category,
             serviceName,
+            price,
             phoneNumber,
             address,
-            date,
+            take_service_at: date,
+            order_date: moment().format('MMMM Do YYYY'),
+            order_time: moment().format('h:mm a'),
             additionalMessage,
             status: "pending"
         }
@@ -40,6 +46,7 @@ const ViewServiceDetails = () => {
             console.log(res.data);
             if(res.data.insertedId){
                 form.reset();
+                navigate("/ourServices")
                 toast.success("We will call you soon to confirm")
             }
         })
@@ -111,6 +118,13 @@ const ViewServiceDetails = () => {
 
                 <input defaultValue={item?.serviceName} type="text" name='serviceName' className="block w-full px-5 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" readOnly={true} required />
             </div>
+
+            <div className="relative flex flex-col mt-4">
+
+<label className="block mb-1 text-sm font-medium text-blue-600 dark:text-gray-200">Price ($)</label>
+
+    <input defaultValue={item?.price} type="number" name='price' className="block w-full px-5 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" readOnly={true} required />
+</div>
 
             <div className="relative flex flex-col mt-4">
 

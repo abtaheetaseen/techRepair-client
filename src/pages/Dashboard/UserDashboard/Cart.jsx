@@ -117,7 +117,7 @@ const Cart = () => {
             <>
         <Link to={"/dashboard/payment"}>
         <button className='w-full btn btn-sm border-none bg-blue-600 tracking-widest text-white hover:bg-blue-500'>
-          Pay
+          Proceed
         </button>
         </Link>
             </>

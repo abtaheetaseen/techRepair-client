@@ -32,7 +32,6 @@ const Register = () => {
         // reset error
         setPassError("");
         setNameError("");
-        setSuccess("");
 
         try {
             setLoading(true);
@@ -171,10 +170,6 @@ const Register = () => {
                         loading ? "Processiong..." : "Register"
                     }
                 </button>
-
-                {
-                    success && <p className='text-green-500'>{success}</p>
-                }
 
 
                 <div className="mt-6 text-center ">

@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import { FaHome, FaUserFriends } from 'react-icons/fa'
 import { FaBars, FaCartPlus, FaDeleteLeft, FaMobileScreen } from 'react-icons/fa6'
 import { CgProfile } from 'react-icons/cg'
-import { MdDashboardCustomize, MdReviews, MdShoppingCart } from 'react-icons/md'
+import { MdDashboardCustomize, MdOutlineBorderColor, MdReviews, MdShoppingCart } from 'react-icons/md'
 import { IoIosAddCircle, IoMdLogOut } from 'react-icons/io'
 import { AuthContext } from '../provider/AuthProvider'
 import { PiMedalMilitaryFill } from 'react-icons/pi'
@@ -193,7 +193,7 @@ const Sidebar = () => {
               </NavLink>
             </li>
 
-            <li>
+            {/* <li>
               <NavLink to="/dashboard/allOrders"
                 end
                 className={({ isActive }) =>
@@ -205,6 +205,21 @@ const Sidebar = () => {
                 <MdShoppingCart className='w-5 h-5 text-gray-700' />
 
                 <span className='mx-4 font-medium text-gray-700'>Shop Orders</span>
+              </NavLink>
+            </li> */}
+
+            <li>
+              <NavLink to="/dashboard/allServicesBookings"
+                end
+                className={({ isActive }) =>
+                    `flex items-center px-4 py-2 my-5  transition-colors duration-300  ${
+                        isActive && "text-blue-600"
+                      }`
+                }
+              >
+                <MdShoppingCart className='w-5 h-5 text-gray-700' />
+
+                <span className='mx-4 font-medium text-gray-700'>Service Bookings</span>
               </NavLink>
             </li>
                     </> 
@@ -233,7 +248,7 @@ const Sidebar = () => {
             </li>
 
             <li>
-              <NavLink to="/dashboard/myServices"
+              <NavLink to="/dashboard/myServiceOrders"
                 end
                 className={({ isActive }) =>
                     `flex items-center px-4 py-2 my-5  transition-colors duration-300  ${
@@ -243,7 +258,22 @@ const Sidebar = () => {
               >
                 <PiMedalMilitaryFill className='w-5 h-5 text-gray-700' />
 
-                <span className='mx-4 font-medium text-gray-700'>My Services</span>
+                <span className='mx-4 font-medium text-gray-700'>My Service Bookings</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/dashboard/myShopOrders"
+                end
+                className={({ isActive }) =>
+                    `flex items-center px-4 py-2 my-5  transition-colors duration-300  ${
+                        isActive && "text-blue-600"
+                      }`
+                }
+              >
+                <MdOutlineBorderColor className='w-5 h-5 text-gray-700' />
+
+                <span className='mx-4 font-medium text-gray-700'>My Shop Orders</span>
               </NavLink>
             </li>
 
