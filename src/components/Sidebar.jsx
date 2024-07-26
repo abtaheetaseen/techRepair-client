@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { FaHome, FaUserFriends } from 'react-icons/fa'
-import { FaBars, FaCartPlus, FaDeleteLeft, FaMobileScreen } from 'react-icons/fa6'
+import { FaBars, FaCartPlus, FaCarTunnel, FaDeleteLeft, FaMobileScreen, FaShopify } from 'react-icons/fa6'
 import { CgProfile } from 'react-icons/cg'
 import { MdDashboardCustomize, MdOutlineBorderColor, MdReviews, MdShoppingCart } from 'react-icons/md'
 import { IoIosAddCircle, IoMdLogOut } from 'react-icons/io'
@@ -12,7 +12,7 @@ import { AuthContext } from '../provider/AuthProvider'
 import { PiMedalMilitaryFill } from 'react-icons/pi'
 import "../App.css"
 import useCart from '../hooks/useCart'
-import { IoBagAdd } from 'react-icons/io5'
+import { IoBagAdd, IoBookmarksSharp } from 'react-icons/io5'
 import useAdmin from '../hooks/useAdmin'
 import { FaProductHunt } from "react-icons/fa6";
 import { RiServiceFill } from 'react-icons/ri'
@@ -98,7 +98,7 @@ const Sidebar = () => {
                     <>
                     <li>
               <NavLink
-              to="/dashboard/adminDashboard"
+              to="/dashboard/dashboardPage"
                 end
                 className="flex items-center px-4 py-2 my-5"
               >
@@ -193,7 +193,7 @@ const Sidebar = () => {
               </NavLink>
             </li>
 
-            {/* <li>
+            <li>
               <NavLink to="/dashboard/allOrders"
                 end
                 className={({ isActive }) =>
@@ -202,11 +202,11 @@ const Sidebar = () => {
                       }`
                 }
               >
-                <MdShoppingCart className='w-5 h-5 text-gray-700' />
+                <FaCarTunnel className='w-5 h-5 text-gray-700' />
 
-                <span className='mx-4 font-medium text-gray-700'>Shop Orders</span>
+                <span className='mx-4 font-medium text-gray-700'>All Shop Orders</span>
               </NavLink>
-            </li> */}
+            </li>
 
             <li>
               <NavLink to="/dashboard/allServicesBookings"
@@ -217,7 +217,7 @@ const Sidebar = () => {
                       }`
                 }
               >
-                <MdShoppingCart className='w-5 h-5 text-gray-700' />
+                <IoBookmarksSharp className='w-5 h-5 text-gray-700' />
 
                 <span className='mx-4 font-medium text-gray-700'>Service Bookings</span>
               </NavLink>
@@ -225,9 +225,9 @@ const Sidebar = () => {
                     </> 
                     :
                     <>
-                    <li>
+                    {/* <li>
               <NavLink
-              to="/dashboard/userDashboard"
+              to="/dashboard/dashboardPage"
                 end
                 className="flex items-center px-4 py-2 my-5"
               >
@@ -235,7 +235,7 @@ const Sidebar = () => {
 
                 <span className='mx-4 font-medium text-gray-700'>Dashboard</span>
               </NavLink>
-            </li>
+            </li> */}
 
             <li>
               <NavLink to="/dashboard/cart"
@@ -292,7 +292,7 @@ const Sidebar = () => {
               </NavLink>
             </li>
 
-            <li>
+            {/* <li>
               <NavLink to="/dashboard/paymentHistory"
                 end
                 className={({ isActive }) =>
@@ -304,6 +304,21 @@ const Sidebar = () => {
                 <AiFillDollarCircle className='w-5 h-5 text-gray-700' />
 
                 <span className='mx-4 font-medium text-gray-700'>Payment History</span>
+              </NavLink>
+            </li> */}
+
+<li>
+              <NavLink to="/shop"
+                end
+                className={({ isActive }) =>
+                    `flex items-center px-4 py-2 my-5  transition-colors duration-300  ${
+                        isActive && "text-blue-600"
+                      }`
+                }
+              >
+                <FaShopify className='w-5 h-5 text-gray-700' />
+
+                <span className='mx-4 font-medium text-gray-700'>Shop</span>
               </NavLink>
             </li>
                     </>

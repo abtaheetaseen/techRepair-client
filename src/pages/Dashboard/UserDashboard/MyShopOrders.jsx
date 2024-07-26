@@ -33,7 +33,7 @@ const MyShopOrders = () => {
       userShopOrders?.map((item, index) =>       
       <tr key={item?._id}>
           <th>{index + 1}</th>
-          <td>{item.cus_ordered_products_name?.map(name => <p className='italic'>{name}</p>)}</td>
+          <td>{item.cus_ordered_products_name?.map((name, index) => <p key={index} className='italic'>*{name}*</p>)}</td>
           <td>${item.total_amount}</td>
           <td>{item.tran_id}</td>
           <td>{item.cus_ordered_products_name.length}</td>

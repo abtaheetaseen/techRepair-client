@@ -62,6 +62,19 @@ const Navbar = () => {
 
             )
           }
+
+          {
+            user && (
+              <Link to="/dashboard/cart">
+                    <li>
+                      <button className='relative'>
+                        <FaCartPlus className='text-[20px] text-blue-500' /> 
+                        <div className='badge bg-blue-500 text-white absolute top-4 left-0'>{cart?.length}</div>
+                      </button>
+                    </li>
+                </Link>   
+            )
+          }
         </ul>
 
         {
@@ -84,26 +97,11 @@ const Navbar = () => {
                 <ul
                   tabIndex={0}
                   className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 flex-col gap-3 text-black'
-                >
-
-                <Link to="/dashboard/cart">
-                    <li>
-                      <button>
-                        <FaCartPlus className='text-[20px] text-blue-500' /> 
-                        <div className='badge bg-blue-500 text-white'>{cart?.length}</div>
-                      </button>
-                    </li>
-                </Link>    
+                >  
 
                   <NavLink to="/dashboard/profile">
                     <li>
-                      <div>Dashboard</div>
-                    </li>
-                  </NavLink>
-
-                  <NavLink to="/payment">
-                    <li>
-                      <div>Give Fund</div>
+                      <div>Profile</div>
                     </li>
                   </NavLink>
 

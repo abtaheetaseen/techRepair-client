@@ -4,7 +4,13 @@ import useProducts from '../hooks/useProducts';
 
 const Shop = () => {
 
-    const [products] = useProducts();
+    const [products, refetch, isLoading] = useProducts();
+
+    if(isLoading){
+      return <div className='flex items-center justify-center'>
+      <div className="loading loading-infinity loading-lg min-h-screen "></div>
+  </div> 
+    }
 
   return (
     <div className='flex items-center justify-center mt-[70px]'>

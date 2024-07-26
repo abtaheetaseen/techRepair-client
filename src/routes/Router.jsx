@@ -27,6 +27,8 @@ import Cancel from "../pages/Dashboard/UserDashboard/Cancel";
 import MyServices from "../pages/Dashboard/UserDashboard/MyServices";
 import AllServicesBookings from "../pages/Dashboard/AdminDashboard/AllServicesBookings";
 import MyShopOrders from "../pages/Dashboard/UserDashboard/MyShopOrders";
+import Profile from "../pages/Dashboard/Profile";
+import DashboardPage from "../pages/Dashboard/DashboardPage";
 
 export const Router = createBrowserRouter([
     {
@@ -102,7 +104,19 @@ export const Router = createBrowserRouter([
                 element: <MyShopOrders />
             },
 
+            // everyones route
+            {
+                path: "profile",
+                element: <Profile />
+            },
+
             // admin routes
+            {
+                path: "dashboardPage",
+                element: <AdminRoute>
+                    <DashboardPage />
+                </AdminRoute>
+            },
             {
                 path: "allUsers",
                 element: <AdminRoute>

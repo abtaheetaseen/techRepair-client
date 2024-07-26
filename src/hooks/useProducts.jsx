@@ -5,14 +5,14 @@ const useProducts = () => {
 
     const axiosPublic = useAxiosPublic();
 
-    const {data: products = [], refetch} = useQuery({
+    const {data: products = [], refetch, isLoading} = useQuery({
         queryKey: ["products"],
         queryFn: async() => {
             const res = await axiosPublic.get("/products");
             return res?.data;
         }
     })
-    return [products, refetch];
+    return [products, refetch, isLoading];
 }
 
 export default useProducts

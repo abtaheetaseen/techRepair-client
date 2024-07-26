@@ -4,7 +4,7 @@ import useServices from '../hooks/useServices';
 
 const OurServices = () => {
 
-    const [services] = useServices();
+    const [services, refetch, isLoading] = useServices();
 
     const tabletServices = services.filter(item => item.category === "Tablet");
     
@@ -13,6 +13,12 @@ const OurServices = () => {
     const laptopServices = services.filter(item => item.category === "Laptop");
 
     const desktopServices = services.filter(item => item.category === "Desktop");
+
+    if(isLoading){
+      return <div className='flex items-center justify-center'>
+      <div className="loading loading-infinity loading-lg min-h-screen "></div>
+  </div> 
+    }
 
   return (
 <div role="tablist" className="tabs tabs-bordered lg:w-10/12 lg:mx-auto md:w-10/12 md:mx-auto mt-[70px]">
