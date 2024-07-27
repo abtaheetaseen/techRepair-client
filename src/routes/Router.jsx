@@ -65,15 +65,21 @@ export const Router = createBrowserRouter([
             },
             {
                 path: "/success",
-                element: <Success />
+                element: <PrivateRoute>
+                    <Success />
+                </PrivateRoute>
             },
             {
                 path: "/fail",
-                element: <Fail />
+                element: <PrivateRoute>
+                    <Fail />
+                </PrivateRoute>
             },
             {
                 path: "/cancel",
-                element: <Cancel />
+                element: <PrivateRoute>
+                    <Cancel />
+                </PrivateRoute>
             },
         ]
     },

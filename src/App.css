@@ -37,3 +37,9 @@
 .active{
     color: rgb(40, 40, 255);
 }
+
+.selected{
+    background-color: rgb(40, 40, 255);
+    color: white;
+    border: none;
+}

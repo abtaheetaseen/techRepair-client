@@ -1,15 +1,59 @@
-import React from 'react'
-import useProducts from '../../../hooks/useProducts'
+import React, { useState } from 'react'
 import { MdDeleteForever } from 'react-icons/md';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { FiEdit } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import "../../../App.css"
+import { useQuery } from '@tanstack/react-query';
+import useProducts from '../../../hooks/useProducts';
 
 const AllProducts = () => {
 
-    const [products, refetch, isLoading] = useProducts();
+    const [products] = useProducts();
+
     const axiosSecure = useAxiosSecure();
+
+    const itemsPerPage = 10;
+    const [currentPage, setCurrentPage] = useState(0);
+    const [allProductsTotal, setAllProductsTotal] = useState("");
+    const allProductsCount = allProductsTotal.totalProductsCount;
+
+    const {data: allShopProducts = [], refetch, isLoading} = useQuery({
+      queryKey: ["allShopProducts", currentPage, itemsPerPage],
+      queryFn: async() => {
+        const res = await axiosSecure.get(`/products?page=${currentPage}&size=${itemsPerPage}`)
+        return res?.data;
+      }
+    })
+
+    const {data: totalProducts = []} = useQuery({
+      queryKey: ["totalProductsCount"],
+      queryFn: async() => {
+          const res = await axiosSecure.get("/totalProductsCount");
+          setAllProductsTotal(res?.data);
+          return res?.data;
+      }
+  })
+
+    const numberOfPages = Math.ceil(allProductsCount / itemsPerPage);
+    
+    const pages = [];
+    for(let i = 0; i < numberOfPages; i++){
+      pages.push(i);
+    }
+
+    const handlePrev = () => {
+      if(currentPage > 0){
+        setCurrentPage(currentPage - 1)
+      }
+    }
+
+    const handleNext = () => {
+      if(currentPage < pages.length - 1){
+        setCurrentPage(currentPage + 1);
+      }
+    }
 
     const handleDelete = (item) => {
         Swal.fire({
@@ -45,6 +89,7 @@ const AllProducts = () => {
       }
 
   return (
+    <>
     <div className='flex items-center justify-center my-[70px]'>
 
       <div>
@@ -67,7 +112,7 @@ const AllProducts = () => {
     <tbody>
 
         {
-            products?.map((item, index) =>       
+            allShopProducts?.map((item, index) =>       
             <tr key={item?._id}>
                 <td>{index + 1}</td>
                 <td>
@@ -110,7 +155,7 @@ const AllProducts = () => {
 <div className="grid grid-cols-1 gap-4 sm:hidden">
 
         {
-          products.map((item, index) => 
+          allShopProducts?.map((item, index) => 
             <div key={index} className="bg-white space-y-3 p-4 rounded-lg shadow">
   <div className="flex flex-col items-center justify-center text-sm">
     <div className='mb-5'>
@@ -161,6 +206,23 @@ const AllProducts = () => {
       </div>
 
     </div>
+
+        {/* pagination */}
+        <div className='flex items-center justify-center gap-2 mb-[50px]'>
+
+        <button onClick={handlePrev} className='btn btn-sm'>Prev</button>
+
+          {
+            pages?.map(page => <button onClick={() => setCurrentPage(page)} className={`btn btn-sm border-blue-800 bg-white text-blue-800 hover:border-none hover:bg-blue-500 hover:text-white ${currentPage === page && "selected"}`} key={page}>
+              {page}
+            </button>)
+          }
+
+          <button onClick={handleNext} className='btn btn-sm'>Next</button>
+
+        </div>
+
+    </>
   )
 }
 
