@@ -10,7 +10,7 @@ const AllUsers = () => {
 
     const axiosSecure = useAxiosSecure();
 
-    const {data: allUsers = [], refetch} = useQuery({
+    const {data: allUsers = [], refetch, isLoading} = useQuery({
         queryKey: ["allUsers"],
         queryFn: async() => {
             const res = await axiosSecure.get("/users");
@@ -134,7 +134,14 @@ const AllUsers = () => {
           
     }
 
+    if(isLoading){
+      return <div className='flex items-center justify-center'>
+      <div className="loading loading-infinity loading-lg min-h-screen "></div>
+  </div> 
+    }
+
   return (
+    <>
     <div className='flex items-center justify-center my-[70px]'>
 
       <div>
@@ -143,7 +150,7 @@ const AllUsers = () => {
         </div>
 
         <div>
-      <div className="overflow-x-auto">
+      <div className="overflow-auto rounded-lg shadow hidden sm:block">
   <table className="table">
     {/* head */}
     <thead>
@@ -164,33 +171,35 @@ const AllUsers = () => {
                 <td>{user.email}</td>
                 <td>{user.role}</td>
                 <td>{user.status}</td>
-                <td>
+
+                <td className="tooltip" data-tip="admin">
                     {/* make admin */}
                     <button disabled={user?.role === "user" ? false : true}  onClick={() => handleUserToAdmin(user)}>
                     <MdAdminPanelSettings className='text-[30px] text-white border-2 rounded-full p-1 bg-blue-500 cursor-pointer' />
                     </button>
                 </td>
 
-                <td>
+                <td className="tooltip" data-tip="user">
                     {/* make user */}
                     <button disabled={user?.role === "user" ? true : false}  onClick={() => handleAdminToUser(user)}>
                     <FaUserCheck className='text-[30px] text-white border-2 rounded-full p-1 bg-yellow-500 cursor-pointer' />
                     </button>
                 </td>
 
-                <td>
+                <td className="tooltip" data-tip="block">
                     {/* block  */}
                     <button disabled={user?.status === "blocked" ? true : false}  onClick={() => handleBlockUser(user)}>
                     <MdBlock className='text-[30px] text-white border-2 rounded-full p-1 bg-red-500 cursor-pointer'/>
                     </button>
                 </td>
 
-                <td>
+                <td className="tooltip" data-tip="active">
                     {/* unblock */}
                     <button disabled={user?.status === "active" ? true : false}  onClick={() => handleActiveUser(user)}>
                     <IoIosUnlock className='text-[30px] text-white border-2 rounded-full p-1 bg-green-500 cursor-pointer' />
                     </button>
                 </td>
+
             </tr>
             )
         }
@@ -198,10 +207,69 @@ const AllUsers = () => {
     </tbody>
   </table>
 </div>
+
+{/* responsive table */}
+
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:hidden">
+
+        {
+          allUsers.map((user, index) => 
+            <div key={index} className="bg-white space-y-3 p-4 rounded-lg shadow">
+  <div className="flex items-center space-x-2 text-sm">
+    <div>
+      <a href="" className="text-blue-800 font-medium bg-blue-200 py-1 px-2 rounded-full">{index + 1}</a>
+    </div>
+    <div className="text-gray-700 font-semibold">{user.email}</div>
+  </div>
+  <div className="text-sm text-gray-700 flex items-center justify-between">
+    <p>Role: {user.role}</p>
+    <p>Status: {user.status}</p>
+  </div>
+  <div className="text-sm text-black">
+    <p className='font-medium mb-2'>Actions</p>
+    <div className='flex items-end justify-between'>
+
+    <div className="tooltip" data-tip="admin">
+                    {/* make admin */}
+                    <button disabled={user?.role === "user" ? false : true}  onClick={() => handleUserToAdmin(user)}>
+                    <MdAdminPanelSettings className='text-[30px] text-white border-2 rounded-full p-1 bg-blue-500 cursor-pointer' />
+                    </button>
+                </div>
+
+                <div className="tooltip" data-tip="user">
+                    {/* make user */}
+                    <button disabled={user?.role === "user" ? true : false}  onClick={() => handleAdminToUser(user)}>
+                    <FaUserCheck className='text-[30px] text-white border-2 rounded-full p-1 bg-yellow-500 cursor-pointer' />
+                    </button>
+                </div>
+
+                <div className="tooltip" data-tip="block">
+                    {/* block  */}
+                    <button disabled={user?.status === "blocked" ? true : false}  onClick={() => handleBlockUser(user)}>
+                    <MdBlock className='text-[30px] text-white border-2 rounded-full p-1 bg-red-500 cursor-pointer'/>
+                    </button>
+                </div>
+
+                <div className="tooltip" data-tip="active">
+                    {/* unblock */}
+                    <button disabled={user?.status === "active" ? true : false}  onClick={() => handleActiveUser(user)}>
+                    <IoIosUnlock className='text-[30px] text-white border-2 rounded-full p-1 bg-green-500 cursor-pointer' />
+                    </button>
+                </div>
+    </div>
+  </div>
+</div>
+          )
+        }
+
+</div>
+
       </div>
       </div>
 
     </div>
+
+    </>
   )
 }
 

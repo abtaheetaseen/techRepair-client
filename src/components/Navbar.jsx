@@ -25,7 +25,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className='navbar z-10 shadow-sm px-4 mx-auto'>
+    <div className='navbar z-10 shadow-sm px-4 mx-auto flex flex-col lg:flex-row md:flex-row'>
       <div className='flex-1'>
         <div className='flex gap-2 items-center'>
         <span><FaMobileScreen className='text-xl text-blue-500' /></span>

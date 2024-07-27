@@ -9,13 +9,19 @@ const MyServices = () => {
     const {user} = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
 
-    const {data: myServiceOrders = []} = useQuery({
+    const {data: myServiceOrders = [], isLoading} = useQuery({
         queryKey: ["myServiceOrders", user?.email],
         queryFn: async() => {
             const res = await axiosSecure.get(`/service-orders?email=${user?.email}`)
             return res.data;
         }
     })
+
+    if(isLoading){
+      return <div className='flex items-center justify-center'>
+      <div className="loading loading-infinity loading-lg min-h-screen "></div>
+  </div> 
+    }
 
   return (
 <div className='flex items-center justify-center my-[70px]'>
@@ -31,7 +37,6 @@ const MyServices = () => {
 {/* head */}
 <thead>
 <tr>
-  <th></th>
   <th>Service</th>
   <th>Provided At</th>
   <th>Price</th>
@@ -43,7 +48,6 @@ const MyServices = () => {
   {
       myServiceOrders?.map((item, index) =>       
       <tr key={item?._id}>
-          <th>{index + 1}</th>
           <td>{item.serviceName}</td>
           <td>{item.take_service_at}</td>
           <td>${item.price}</td>

@@ -10,14 +10,14 @@ const useOrders = () => {
 
     const axiosSecure = useAxiosSecure();
 
-    const {data: userShopOrders = [], refetch} = useQuery({
+    const {data: userShopOrders = [], refetch, isLoading} = useQuery({
         queryKey: ["orders", user?.email],
         queryFn: async() => {
             const res = await axiosSecure.get(`/shop-orders/${user?.email}`);
             return res?.data;
         }
     })
-    return [userShopOrders, refetch];
+    return [userShopOrders, refetch, isLoading];
 }
 
 export default useOrders

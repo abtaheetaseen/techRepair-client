@@ -5,11 +5,10 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { FiEdit } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { IoEye } from 'react-icons/io5';
 
 const AllProducts = () => {
 
-    const [products, refetch] = useProducts();
+    const [products, refetch, isLoading] = useProducts();
     const axiosSecure = useAxiosSecure();
 
     const handleDelete = (item) => {
@@ -39,6 +38,12 @@ const AllProducts = () => {
         });
       }
 
+      if(isLoading){
+        return <div className='flex items-center justify-center'>
+        <div className="loading loading-infinity loading-lg min-h-screen "></div>
+    </div> 
+      }
+
   return (
     <div className='flex items-center justify-center my-[70px]'>
 
@@ -48,7 +53,7 @@ const AllProducts = () => {
         </div>
 
         <div>
-      <div className="overflow-x-auto">
+      <div className="overflow-auto rounded-lg shadow hidden sm:block">
   <table className="table">
     {/* head */}
     <thead>
@@ -99,6 +104,59 @@ const AllProducts = () => {
     </tbody>
   </table>
 </div>
+
+
+{/* responsive products table */}
+<div className="grid grid-cols-1 gap-4 sm:hidden">
+
+        {
+          products.map((item, index) => 
+            <div key={index} className="bg-white space-y-3 p-4 rounded-lg shadow">
+  <div className="flex flex-col items-center justify-center text-sm">
+    <div className='mb-5'>
+    <a href="" className="text-blue-800 font-medium bg-blue-200 py-1 px-2 rounded-full">{index + 1}</a>
+    </div>
+    <div className='flex flex-row items-center justify-center gap-2'>
+    <div className="flex items-center justify-center gap-1">
+              <div className="avatar">
+                <div className="mask mask-squircle h-12 w-12">
+                  <img
+                    src={item.image}
+                    alt="Avatar Tailwind CSS Component" />
+                </div>
+              </div>
+              <div>
+                <div className="font-bold">{item.gadgetName.toUpperCase()}</div>
+              </div>
+            </div>
+    <div>
+      <span
+        className="p-1.5 text-xs font-medium uppercase tracking-wider text-blue-800 bg-blue-200 rounded-lg bg-opacity-50">${item.price}</span>
+    </div>
+    </div>
+  </div>
+
+  <div className='flex items-center justify-center gap-5'>
+  <div>
+  <Link to={`/dashboard/updateProduct/${item._id}`}>
+                    <button>
+                    <FiEdit className='text-lg text-blue-600'/>
+                    </button>
+                    </Link>
+                </div>
+                <div>
+                <button onClick={() => handleDelete(item)}>
+            <MdDeleteForever className='text-xl text-red-700' />
+            </button>
+          </div>
+  </div>
+</div>
+          )
+        }
+
+</div>
+
+
       </div>
       </div>
 
