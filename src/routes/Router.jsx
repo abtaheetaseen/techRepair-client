@@ -57,7 +57,7 @@ export const Router = createBrowserRouter([
                 element: <PrivateRoute>
                     <ViewServiceDetails />
                 </PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
+                loader: ({params}) => fetch(`https://tech-repair-server.vercel.app/services/${params.id}`)
             },
             {
                 path: "/shop",
@@ -170,14 +170,14 @@ export const Router = createBrowserRouter([
                 element: <AdminRoute>
                     <UpdateProduct />
                 </AdminRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+                loader: ({params}) => fetch(`https://tech-repair-server.vercel.app/products/${params.id}`)
             },
             {
                 path: "updateService/:id",
                 element: <AdminRoute>
                     <UpdateService />
                 </AdminRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
+                loader: ({params}) => fetch(`https://tech-repair-server.vercel.app/services/${params.id}`)
             },
         ]
     }
